@@ -1,6 +1,10 @@
 TestingFileUtilities
 ====================
 
+[![NuGet version](https://badge.fury.io/nu/TestingFileUtilities.svg)](https://badge.fury.io/nu/TestingFileUtilities)
+[![NuGet Download](https://img.shields.io/nuget/dt/TestingFileUtilities.svg)](https://www.nuget.org/packages/TestingFileUtilities)
+[![MIT License](https://img.shields.io/github/license/banban525/TestingFileUtilities.svg)](LICENSE)
+
 This library supports the creation of test folders and files.
 
 ## Description
