@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>TestingFileUtilities</PackageId>
+    <Authors>banban525</Authors>
+    <Product>TestingFileUtilities</Product>
+    <Description>This library supports the creation of test folders and files.</Description>
+    <Copyright>Copyright (c) 2021 banban525</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+</Project>
