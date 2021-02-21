@@ -8,6 +8,10 @@
     <Description>This library supports the creation of test folders and files.</Description>
     <Copyright>Copyright (c) 2021 banban525</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/banban525/TestingFileUtilities</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/banban525/TestingFileUtilities</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>
