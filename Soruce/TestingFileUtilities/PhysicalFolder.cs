@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace TestingFileUtilities
 {
-    public class PhysicalFolder : IPhysicalNode, IDisposable, IReadOnlyDictionary<string, IPhysicalNode>
+    public partial class PhysicalFolder : IPhysicalNode, IDisposable, IReadOnlyDictionary<string, IPhysicalNode>
     {
         public string FullPath { get; }
 

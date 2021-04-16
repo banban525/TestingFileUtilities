@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TestingFileUtilities
 {
-    public class TextFile : INode, IAttributeNode<TextFile>
+    public partial class TextFile : INode, IAttributeNode<TextFile>, IPhysicalFile, IInternalNode
     {
         public TextFile(string fileName, string content)
             : this(fileName, content, Encoding.UTF8)
@@ -43,7 +43,9 @@ namespace TestingFileUtilities
             Encoding = encoding;
         }
 
-        public string Name { get; }
+        string IPhysicalFile.FullPath => _fullPath;
+        private string _fullPath;
+        public string Name { get; private set; }
         public string Content { get; private set; }
         public Func<string> ContentFactory { get; private set; }
         public Encoding Encoding { get; private set; }
@@ -103,6 +105,11 @@ namespace TestingFileUtilities
             return new PhysicalFile(Name, filePath);
         }
 
+        public IPhysicalFile AsPhysicalFile()
+        {
+            return this;
+        }
+
         public FileAttributes? AttributesValue { get; private set; }
         public DateTime? CreationTimeValue { get; private set; }
         public DateTime? LastWriteTimeValue { get; private set; }
@@ -125,6 +132,16 @@ namespace TestingFileUtilities
             var result = Clone();
             result.LastWriteTimeValue = lastWriteTime;
             return result;
+        }
+
+        void IInternalNode.ChangeName(string newFileName)
+        {
+            Name = newFileName;
+        }
+
+        void IInternalNode.ChangeFilePath(string filePath)
+        {
+            _fullPath = filePath;
         }
     }
 }

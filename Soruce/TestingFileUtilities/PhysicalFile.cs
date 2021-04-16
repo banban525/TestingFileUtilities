@@ -2,14 +2,17 @@
 
 namespace TestingFileUtilities
 {
-    public class PhysicalFile : IPhysicalNode
+    public partial class PhysicalFile : IPhysicalNode, IPhysicalFile
     {
+        private readonly string _fullPath;
+
         public PhysicalFile(string name, string filePath)
         {
             Name = name;
-            FullPath = filePath;
+            _fullPath = filePath;
         }
         public string Name { get; }
-        public string FullPath { get; }
+
+        public string FullPath => _fullPath;
     }
 }

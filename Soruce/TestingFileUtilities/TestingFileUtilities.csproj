@@ -12,6 +12,58 @@
     <RepositoryUrl>https://github.com/banban525/TestingFileUtilities</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="FileFunctions - コピー.cs">
+      <DependentUpon>FolderFunctions.Partial.cs</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="FolderFunctions.Partial.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FolderFunctions.Partial.tt</DependentUpon>
+    </Compile>
+    <Compile Update="FileFunctions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FileFunctions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="IPhysicalFile,.Partial.cs">
+      <DependentUpon>IPhysicalFile,.Partial.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="TextFile.Partial.cs">
+      <DependentUpon>TextFile.Partial.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="FileFunctions.tt">
+      <LastGenOutput>FileFunctions.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="FolderFunctions.Partial.tt">
+      <LastGenOutput>FolderFunctions.Partial.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="IPhysicalFile,.Partial.tt">
+      <LastGenOutput>IPhysicalFile,.Partial.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="TextFile.Partial.tt">
+      <LastGenOutput>TextFile.Partial.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
 
 </Project>

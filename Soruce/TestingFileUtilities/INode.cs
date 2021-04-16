@@ -9,6 +9,12 @@ namespace TestingFileUtilities
         IPhysicalNode CreateTo(PhysicalFolder directory);
     }
 
+    public interface IInternalNode : INode
+    {
+        void ChangeName(string newFileName);
+        void ChangeFilePath(string filePath);
+    }
+
     public interface IAttributeNode<out T>
     {
         T Attributes(FileAttributes fileAttributes);

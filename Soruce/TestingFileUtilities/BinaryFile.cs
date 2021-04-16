@@ -4,8 +4,10 @@ using System.Reflection;
 
 namespace TestingFileUtilities
 {
-    public class BinaryFile : INode, IAttributeNode<BinaryFile>
+    public partial class BinaryFile : INode, IAttributeNode<BinaryFile>, IPhysicalFile, IInternalNode
     {
+        private string _fullPath;
+
         private BinaryFile(string fileName)
         {
             Name = fileName;
@@ -46,7 +48,10 @@ namespace TestingFileUtilities
 
 
 
-        public string Name { get; }
+        public string Name { get; private set; }
+
+        string IPhysicalFile.FullPath => _fullPath;
+
         public byte[] Content { get; private set; }
         public Func<byte[]> ContentFactory { get; private set; }
         public Action<Stream> ContentCallBack { get; private set; }
@@ -102,6 +107,11 @@ namespace TestingFileUtilities
 
             return new PhysicalFile(Name, filePath);
         }
+        
+        public IPhysicalFile AsPhysicalFile()
+        {
+            return this;
+        }
 
         private BinaryFile Clone()
         {
@@ -142,6 +152,16 @@ namespace TestingFileUtilities
             var result = Clone();
             result.LastWriteTimeValue = lastWriteTime;
             return result;
+        }
+
+        void IInternalNode.ChangeName(string newFileName)
+        {
+            Name = newFileName;
+        }
+
+        void IInternalNode.ChangeFilePath(string filePath)
+        {
+            _fullPath = filePath;
         }
     }
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.IO.Compression;
-using System.Linq;
+﻿using System.IO.Compression;
 using System.Text;
 
 namespace TestingFileUtilities
@@ -13,10 +10,20 @@ namespace TestingFileUtilities
             : this(name, new ZipCreator(), nodes)
         {
         }
+        public ZipFile(string name, object anonymousTypeFolder)
+            : this(name, new ZipCreator(), anonymousTypeFolder)
+        {
+        }
+
         private ZipFile(string name, ZipCreator createArchiveFile, params INode[] nodes)
             : base(name, createArchiveFile, nodes)
         {
-            _zipCreator = (ZipCreator)createArchiveFile;
+            _zipCreator = createArchiveFile;
+        }
+        private ZipFile(string name, ZipCreator createArchiveFile, object anonymousTypeFolder)
+            : base(name, createArchiveFile, anonymousTypeFolder)
+        {
+            _zipCreator = createArchiveFile;
         }
 
 
@@ -40,7 +47,9 @@ namespace TestingFileUtilities
 
         protected override ZipFile Clone()
         {
-            var result = new ZipFile(Name, _zipCreator, @Nodes);
+            var result = AnonymousTypeFolder != null ? 
+                new ZipFile(Name, _zipCreator, AnonymousTypeFolder) : 
+                new ZipFile(Name, _zipCreator, @Nodes);
 
             CopyTo(result);
 
