@@ -1,0 +1,41 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using System;
+using TestingFileUtilities;
+
+<# foreach(var type in _types) { #>
+
+namespace <#= type.NamespaceName #>
+{
+    public partial class <#= type.Name #>
+    {
+<# foreach(var property in type.Properties) { #>
+        public <#= property.Type #> <#= property.Name #>  { get; } = <#= property.Expression #>;
+<# } #>
+        
+
+<# foreach(var childType in type.ChildTypes) { #>
+        public partial class <#= childType.Name #>
+        {
+            public <#= childType.Name #>(dynamic initValue)
+            {
+<# foreach(var property in childType.Properties) { #>
+<# if(property.Type == "IPhysicalFile") { #>
+                <#= property.Name #> = initValue.<#= property.Name #>;
+<# } else { #>
+                <#= property.Name #> = new <#= property.Type #>(initValue.<#= property.Name #>);
+<# } #>
+<# } #>
+            }
+<# foreach(var property in childType.Properties) { #>
+            public <#= property.Type #> <#= property.Name #> { get; }
+<# } #>
+        }
+<# } #>
+    }
+}
+<# } #>
