@@ -113,7 +113,7 @@ namespace TestingFileUtilities
             return this;
         }
 
-        private BinaryFile Clone()
+        public BinaryFile Clone()
         {
             return new BinaryFile(Name, Content)
             {

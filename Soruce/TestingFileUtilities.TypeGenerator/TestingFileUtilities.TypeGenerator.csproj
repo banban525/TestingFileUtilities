@@ -1,8 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+    <Authors>banban525</Authors>
+    <Company>banban525banban525</Company>
+    <Product>TestingFileUtilities</Product>
+    <Copyright>Copyright (c) 2021 banban525</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/banban525/TestingFileUtilities</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/banban525/TestingFileUtilities</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <Description>This source generator create classes from an anonymous type for TestingFileUtilities.</Description>
   </PropertyGroup>
 
   <ItemGroup>

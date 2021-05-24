@@ -12,5 +12,10 @@ namespace TestingFileUtilities
         {
             FullPath = filePath;
         }
+
+        public FolderFunctions Clone()
+        {
+            return new FolderFunctions {FullPath = FullPath};
+        }
     }
 }

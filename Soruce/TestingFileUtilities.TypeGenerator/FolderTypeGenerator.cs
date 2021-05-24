@@ -41,7 +41,7 @@ namespace TestingFileUtilities.TypeGenerator
             var text = new Formatter(types).TransformText();
 
             context.AddSource(
-                $"FolderType.Generated",
+                $"TestingFileUtilities.TypeGenerator",
                 SourceText.From(text, System.Text.Encoding.UTF8));
         }
     }

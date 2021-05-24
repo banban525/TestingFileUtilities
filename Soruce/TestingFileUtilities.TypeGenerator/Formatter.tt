@@ -16,26 +16,31 @@ namespace <#= type.NamespaceName #>
 <# foreach(var property in type.Properties) { #>
         public <#= property.Type #> <#= property.Name #>  { get; } = <#= property.Expression #>;
 <# } #>
-        
 
 <# foreach(var childType in type.ChildTypes) { #>
         public partial class <#= childType.Name #>
         {
-            public <#= childType.Name #>(dynamic initValue)
+            public <#= childType.Name #>(
+                <#=string.Join(",\r\n                ", childType.Properties.Select(_=>_.Type + " " + _.Name)) #>
+            )
             {
 <# foreach(var property in childType.Properties) { #>
-<# if(property.Type == "IPhysicalFile") { #>
-                <#= property.Name #> = initValue.<#= property.Name #>;
-<# } else { #>
-                <#= property.Name #> = new <#= property.Type #>(initValue.<#= property.Name #>);
-<# } #>
+                this.<#= property.Name #> = <#= property.Name #>;
 <# } #>
             }
 <# foreach(var property in childType.Properties) { #>
             public <#= property.Type #> <#= property.Name #> { get; }
 <# } #>
         }
+
 <# } #>
     }
 }
 <# } #>
+
+<#+
+        internal string StringJoin<T>(IEnumerable<T> list, Func<T,string> formatter)
+        {
+            return string.Join(",\r\n                ", list.Select(formatter));
+        }
+#>

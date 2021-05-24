@@ -43,5 +43,13 @@ namespace TestingFileUtilities
         {
             _fullPath = filePath;
         }
+
+        public Empty Clone()
+        {
+            return new Empty(Name)
+            {
+                _fullPath = _fullPath
+            };
+        }
     }
 }

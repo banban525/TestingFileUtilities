@@ -45,7 +45,7 @@ namespace TestingFileUtilities
             return result;
         }
 
-        protected override ZipFile Clone()
+        public override ZipFile Clone()
         {
             var result = AnonymousTypeFolder != null ? 
                 new ZipFile(Name, _zipCreator, AnonymousTypeFolder) : 

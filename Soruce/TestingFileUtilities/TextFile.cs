@@ -51,7 +51,7 @@ namespace TestingFileUtilities
         public Encoding Encoding { get; private set; }
         public Action<StreamWriter> WriteCallback { get; private set; }
 
-        private TextFile Clone()
+        public TextFile Clone()
         {
             return new TextFile(Name, Content)
             {

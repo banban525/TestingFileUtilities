@@ -84,48 +84,49 @@ namespace TestingFileUtilities.TypeGenerator
             
             #line default
             #line hidden
-            this.Write("        \r\n\r\n");
+            this.Write("\r\n");
             
-            #line 21 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 20 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
  foreach(var childType in type.ChildTypes) { 
             
             #line default
             #line hidden
             this.Write("        public partial class ");
             
-            #line 22 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 21 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(childType.Name));
             
             #line default
             #line hidden
             this.Write("\r\n        {\r\n            public ");
             
-            #line 24 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 23 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(childType.Name));
             
             #line default
             #line hidden
-            this.Write("(dynamic initValue)\r\n            {\r\n");
+            this.Write("(\r\n                ");
             
-            #line 26 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 24 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(string.Join(",\r\n                ", childType.Properties.Select(_=>_.Type + " " + _.Name))));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n            )\r\n            {\r\n");
+            
+            #line 27 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
  foreach(var property in childType.Properties) { 
             
             #line default
             #line hidden
-            
-            #line 27 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
- if(property.Type == "IPhysicalFile") { 
-            
-            #line default
-            #line hidden
-            this.Write("                ");
+            this.Write("                this.");
             
             #line 28 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
-            this.Write(" = initValue.");
+            this.Write(" = ");
             
             #line 28 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
@@ -135,88 +136,66 @@ namespace TestingFileUtilities.TypeGenerator
             this.Write(";\r\n");
             
             #line 29 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
- } else { 
-            
-            #line default
-            #line hidden
-            this.Write("                ");
-            
-            #line 30 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write(" = new ");
-            
-            #line 30 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Type));
-            
-            #line default
-            #line hidden
-            this.Write("(initValue.");
-            
-            #line 30 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
-            
-            #line default
-            #line hidden
-            this.Write(");\r\n");
-            
-            #line 31 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
- } 
-            
-            #line default
-            #line hidden
-            
-            #line 32 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
  } 
             
             #line default
             #line hidden
             this.Write("            }\r\n");
             
-            #line 34 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 31 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
  foreach(var property in childType.Properties) { 
             
             #line default
             #line hidden
             this.Write("            public ");
             
-            #line 35 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 32 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Type));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 35 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 32 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(property.Name));
             
             #line default
             #line hidden
             this.Write(" { get; }\r\n");
             
-            #line 36 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 33 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("        }\r\n");
+            this.Write("        }\r\n\r\n");
             
-            #line 38 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 36 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
  } 
             
             #line default
             #line hidden
             this.Write("    }\r\n}\r\n");
             
-            #line 41 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+            #line 39 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
  } 
             
             #line default
             #line hidden
+            this.Write("\r\n");
             return this.GenerationEnvironment.ToString();
         }
+        
+        #line 41 "C:\work\TestingFileUtilities\Soruce\TestingFileUtilities.TypeGenerator\Formatter.tt"
+
+        internal string StringJoin<T>(IEnumerable<T> list, Func<T,string> formatter)
+        {
+            return string.Join(",\r\n                ", list.Select(formatter));
+        }
+
+        
+        #line default
+        #line hidden
     }
     
     #line default

@@ -15,12 +15,20 @@ namespace TestingFileUtilities.TypeGenerator.Test
                 new TestFolder());
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _workDir.Dispose();
+        }
+
+
         [Test]
         public void Test1()
         {
             FileAssert.Exists(_workDir.Root.test_txt.FullPath);
             FileAssert.Exists(_workDir.Root.Dir.test_pdf.FullPath);
             FileAssert.Exists(_workDir.Root.test2_txt.FullPath);
+            FileAssert.Exists(_workDir.Root.Dir.SubDir.text3_txt.FullPath);
         }
     }
 
@@ -34,7 +42,12 @@ namespace TestingFileUtilities.TypeGenerator.Test
             Dir = new
             {
                 test_pdf = Files.BinaryFile(new byte[] { 0x00 }),
-                Info = Files.FolderFunctions()
+                Info = Files.FolderFunctions(),
+                SubDir = new
+                {
+                    Info = Files.FolderFunctions(),
+                    text3_txt = Files.TextFile("text3.txt content")
+                }
             },
             test2_txt = Files.TextFile("test2.txt content"),
             binary_dat = Files.BinaryFile(new byte[] { 0x00 })

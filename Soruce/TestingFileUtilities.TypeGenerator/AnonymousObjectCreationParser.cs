@@ -97,6 +97,7 @@ namespace TestingFileUtilities.TypeGenerator
                 node = node.Parent;
             }
 
+            namespaceList.Reverse();
             return string.Join(".", namespaceList);
         }
     }
@@ -119,16 +120,35 @@ namespace TestingFileUtilities.TypeGenerator
                         AnonymousObjectCreationParser.Parse(parentFieldNames.Concat(new[] { name }).ToArray(), subDir);
                     allTypes.AddRange(subDirTypes);
 
-                    var className = subDirTypes.Last()?.Name ?? throw new InvalidOperationException();
+                    var classObj = subDirTypes.Last() ?? throw new InvalidOperationException();
+                    var className = classObj.Name;
+                    var props = string.Join(",", classObj.Properties.Select(_ => _.Expression));
+
                     var property = new MyProperty(
                         name,
                         className,
-                        $"new {className}({parentFieldNames.First()}.{name})");
+                        $"new {className}({props})");
                     properties.Add(property);
+                }
+                else if(initializer.Expression is InvocationExpressionSyntax invocationExpression)
+                {
+                    var methodName = invocationExpression.Expression.ToString();
+                    if (methodName.EndsWith("Files.FolderFunctions"))
+                    {
+                        var property = new MyProperty(name, "FolderFunctions", string.Join(".", parentFieldNames) + $".{name}.Clone()");
+                        properties.Add(property);
+                    }
+                    else
+                    {
+                        var property = new MyProperty(name, "IPhysicalFile",
+                            string.Join(".", parentFieldNames) + $".{name}.Clone()");
+                        properties.Add(property);
+                    }
                 }
                 else
                 {
-                    var property = new MyProperty(name, "IPhysicalFile", $"{parentFieldNames.First()}.{name}");
+                    var property = new MyProperty(name, "IPhysicalFile",
+                        string.Join(".", parentFieldNames) + $".{name}.Clone()");
                     properties.Add(property);
                 }
             }

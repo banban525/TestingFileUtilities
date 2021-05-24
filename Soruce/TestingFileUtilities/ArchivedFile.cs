@@ -105,7 +105,7 @@ namespace TestingFileUtilities
         public DateTime? CreationTimeValue { get; private set; }
         public DateTime? LastWriteTimeValue { get; private set; }
 
-        protected abstract T Clone();
+        public abstract T Clone();
 
         protected void CopyTo(T copyTo)
         {
@@ -151,7 +151,7 @@ namespace TestingFileUtilities
         {
         }
 
-        protected override GenericArchivedFile Clone()
+        public override GenericArchivedFile Clone()
         {
             var result = new GenericArchivedFile(Name, CreateArchiveFile, @Nodes);
             CopyTo(result);
