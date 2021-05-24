@@ -1,9 +1,15 @@
 TestingFileUtilities
 ====================
 
+[![MIT License](https://img.shields.io/github/license/banban525/TestingFileUtilities.svg)](LICENSE)
+
 [![NuGet version](https://badge.fury.io/nu/TestingFileUtilities.svg)](https://badge.fury.io/nu/TestingFileUtilities)
 [![NuGet Download](https://img.shields.io/nuget/dt/TestingFileUtilities.svg)](https://www.nuget.org/packages/TestingFileUtilities)
-[![MIT License](https://img.shields.io/github/license/banban525/TestingFileUtilities.svg)](LICENSE)
+(TestingFileUtilities)
+
+[![NuGet version](https://badge.fury.io/nu/TestingFileUtilities.TypeGenerator.svg)](https://badge.fury.io/nu/TestingFileUtilities.TypeGenerator)
+[![NuGet Download](https://img.shields.io/nuget/dt/TestingFileUtilities.TypeGenerator.svg)](https://www.nuget.org/packages/TestingFileUtilities.TypeGenerator)
+(TestingFileUtilities.TypeGenerator)
 
 This library supports the creation of test folders and files.
 
@@ -77,7 +83,55 @@ var filesInSubFolder = dir.Root.SubFolder.FolderInfo.GetFiles();
 ```
 
 
+### Automatically created type-based creation and file access. (ver.1.1 or higher and using TestingFileUtilities.TypeGenerator)
 
+The created folder object must be a named type, not an anonymous type, in order to be a class member.
+You can use the TestingFileUtilities.TypeGenerator package to automatically generate named types from Anonymous types.
+
+```
+    public partial class TestFolder
+    {
+        [FolderTypeGeneratorInitialValue]
+        private static readonly dynamic InitValue = new
+        {
+            test_txt = Files.TextFile("test.txt content"),
+            Dir = new
+            {
+                test_pdf = Files.BinaryFile(new byte[] { 0x00 }),
+                Info = Files.FolderFunctions(),
+                SubDir = new
+                {
+                    Info = Files.FolderFunctions(),
+                    text3_txt = Files.TextFile("text3.txt content")
+                }
+            },
+            test2_txt = Files.TextFile("test2.txt content"),
+            binary_dat = Files.BinaryFile(new byte[] { 0x00 })
+        };
+    }
+```
+
+
+```
+        private TypeBasePhysicalFolder<TestFolder> _workDir;
+        [SetUp]
+        public void Setup()
+        {
+            var rootDir = Path.Combine(TestContext.CurrentContext.TestDirectory, TestContext.CurrentContext.Test.FullName);
+
+            _workDir = TypeBasePhysicalFolder.CreatePhysicalFolder(rootDir, PhysicalFolderDeleteType.DeleteFolder,
+                new TestFolder());
+        }
+
+        [Test]
+        public void Test1()
+        {
+            FileAssert.Exists(_workDir.Root.test_txt.FullPath);
+            FileAssert.Exists(_workDir.Root.Dir.test_pdf.FullPath);
+            FileAssert.Exists(_workDir.Root.test2_txt.FullPath);
+            FileAssert.Exists(_workDir.Root.Dir.SubDir.text3_txt.FullPath);
+        }
+```
 
 ## Install
 
@@ -85,6 +139,12 @@ You can install the package from nuget.
 
 ```
 dotnet add package TestingFileUtilities
+```
+
+If you use the TestingFileUtilities.TypeGenerator package, you must install it using nuget.
+
+```
+dotnet add package TestingFileUtilities.TypeGenerator
 ```
 
 ## Licence
